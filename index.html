@@ -2,13 +2,16 @@
 <html>
 <head>
 	<title>Online Store</title>
+	<script type="text/javascript" src="js/validations.js"></script>
+	<link rel="stylesheet" type="text/css" href="css/styles.css" media="screen">
+	<meta charset="utf-8">
 </head>
 
 <body>
 
 	<div id="all" class="container">
 
-		<div id="menu" class="subcontainer">
+		<div id="layout_main" class="subcontainer">
 
 
 			<!-- Cantidad de Productos igual numeros de div-->
@@ -33,15 +36,21 @@
 
 				<!-- Div que se despliega cuando presioan el boton calcular en la misma pagina  y se muestra la tabla de la compra con los calculos y hablita button:register-->
 
-				<div id="calculate_Total" class="calculate_Pay"><br>
+			<div id="divZoneBuy" class="divZonaNotBuy">
+	
+
+				<div id="calculate_Total" class="calculate_Pay">
+					<p><b>Carrito de la compra, si quiere hacer alguna modificacion aun esta a tiempo:</b></p>
 					<table id="total_Table"></table>
 				</div>
 
 
 			<!--DIV button_register-->
-				<div id="div_Data" >
-					
+			<div id="div_Data" class="calculate_Pay" >
+					<p><b>Introduzca sus datos personales:</b></p>
 
+				<div id="divDatosPersonales0">
+					<div id="divDatosPersonales1">
 						<label>Nombre completo:</label><br/>
 						<input type="text" id="nombre" value="" size="26" /><br/>
 
@@ -83,9 +92,19 @@
 						</select><br/>
 								
 				</div>
+				<div id="divDatosPersonales2">
+						<label>Telefono movil:</label><br/>
+						<input type="text" id="movil" value="" size="8" maxlength="9"/><br/>
 
-
-				<div id="div_button_Pay" class="info_pay">
+						<label>Email:</label><br/>
+						<input type="text" id="email1" value="" size="25" /><br/>
+									
+						<label>Repita el email:</label><br/>
+						<input type="text" id="email2" value="" size="25" />							
+				</div>
+			</div>
+<!-- DIV button pay-->
+				<div id="div_button_Pay" class="calculate_Pay">
 					<p><b>Introduzca los datos de la tarjeta de credito/debito donde se cargara el cobro:</b></p>
 					<label>Titular de la tarjeta:</label><br/>
 					<input type="text" id="titular" value="" size="26" /><br/>
@@ -113,7 +132,7 @@
 							</label>
 					
 					</div>
-<!--/////////////////////////////////////////////////-->	
+<!--//////////////////////////////<!-- DIV tarjeta parte derecha-->
 					<div id="divNumeroTarjeta">
 							<label>Número tarjeta y CVC:</label><br/>
 							<input type="text" id="numeroTarjeta" value="" size="15" maxlength="16" />
@@ -131,6 +150,7 @@
 						<!--/////////////////////////////////////////////////-->
 
 				</div>
+			</div>
 		</div>
 		
 	</div>

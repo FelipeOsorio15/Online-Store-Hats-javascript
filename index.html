@@ -31,7 +31,106 @@
 
 			</div>
 
+				<!-- Div que se despliega cuando presioan el boton calcular en la misma pagina  y se muestra la tabla de la compra con los calculos y hablita button:register-->
 
+				<div id="calculate_Total" class="calculate_Pay"><br>
+					<table id="total_Table"></table>
+				</div>
+
+
+			<!--DIV button_register-->
+				<div id="div_Data" >
+					
+
+						<label>Nombre completo:</label><br/>
+						<input type="text" id="nombre" value="" size="26" /><br/>
+
+						<label>Tipo de Doc:</label><br/>
+						<select id="document_Type">
+							<option value="">&nbsp;&nbsp;&nbsp;&nbsp;&nbs;Tipo</option>
+							<option value="type1">C. Ciudadania</option>
+							<option value="dia2">Tarjeta I</option>
+							<option value="dia3">L. Militar</option>
+					
+						</select>
+
+						<input type="text" id="dni" value="" size="8" maxlength="9" /><br/>
+									
+					    <label>Fecha de nacimiento:</label><br/>
+
+					    <select id="fechaNacimientoDia">
+						<option value="">&nbsp;dia&nbsp;</option>
+						</select>
+
+						<select id="fechaNacimientoMes">
+						<option value="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;mes</option>
+						<option value="1">Enero</option>
+						<option value="2">Febrero</option>
+						<option value="3">Marzo</option>
+						<option value="4">Abril</option>
+						<option value="5">Mayo</option>
+						<option value="6">Junio</option>
+						<option value="7">Julio</option>
+						<option value="8">Agosto</option>
+						<option value="9">Septiembre</option>
+						<option value="10">Octubre</option>
+						<option value="11">Noviembre</option>
+						<option value="12">Diciembre</option>
+						</select>	
+
+						<select id="fechaNacimientoAnio">
+							<option value="">&nbsp;&nbsp;año&nbsp;</option>
+						</select><br/>
+								
+				</div>
+
+
+				<div id="div_button_Pay" class="info_pay">
+					<p><b>Introduzca los datos de la tarjeta de credito/debito donde se cargara el cobro:</b></p>
+					<label>Titular de la tarjeta:</label><br/>
+					<input type="text" id="titular" value="" size="26" /><br/>
+
+					<div id="metodosDePago">
+							<label><span  id="alertTipoDeTarjeta">Tipo de tarjeta:</span></label><br/>
+							<label for="visa">
+								<input type="radio" id="visa" name="tarjetas" class="logoTarjetas" value="Visa">
+								<img src="img/pago/visa.gif"></img>
+							</label>
+							  
+							<label for="masterCard">
+								<input type="radio" id="masterCard" name="tarjetas" class="logoTarjetas" value="MasterCard">
+								<img src="img/pago/mastercard.gif"></img>
+							</label>
+							  
+							<label for="amex">
+								<input type="radio" id="amex" name="tarjetas" class="logoTarjetas" value="American Express">
+								<img src="img/pago/amex.gif"></img>
+							</label>
+							  
+							<label for="aurora">
+								<input type="radio" id="aurora" name="tarjetas" class="logoTarjetas" value="Aurora">
+								<img src="img/pago/aurora.gif"></img>
+							</label>
+					
+					</div>
+<!--/////////////////////////////////////////////////-->	
+					<div id="divNumeroTarjeta">
+							<label>Número tarjeta y CVC:</label><br/>
+							<input type="text" id="numeroTarjeta" value="" size="15" maxlength="16" />
+							<input type="text" id="cvcTarjeta" value="" size="2" maxlength="3" /><br/>
+							
+							
+							<select id="mesTarjeta">
+								<option value="">&nbsp;&nbsp;mes&nbsp;</option>
+							</select>
+
+							<select id="anioTarjeta">
+								<option value="">&nbsp;&nbsp;año&nbsp;</option>
+							</select>
+					</div>
+						<!--/////////////////////////////////////////////////-->
+
+				</div>
 		</div>
 		
 	</div>

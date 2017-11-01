@@ -171,8 +171,8 @@ window.onload = function (){
 		totalAPagar=totalAPagar/100;		
 		
 		//Se añade a la tabla el TOTAL que suma el carrito:
-		tablaTotal = document.getElementById("tablaTotal").innerHTML;
-		document.getElementById("tablaTotal").innerHTML = tablaTotal + '<tr><td>&nbsp;</td>&nbsp;<td></td><td class="preUni"><b>Transporte: </b></td><td class="preTotal"><b>' +totalTransporte+ '</b></td></tr>' + '<tr><td>&nbsp;</td>&nbsp;<td></td><td class="preUni"><b>IVA ('+(IVA*100)+'%): </b></td><td class="preTotal"><b>' +totalIVA+ '</b></td></tr>' + '<tr><td>&nbsp;</td>&nbsp;<td></td><td class="preUni"><b>Total: </b></td><td class="preTotal" id="totalAPagar"><b>' +totalAPagar+ ' €</b></td></tr>';
+		total_Table = document.getElementById("total_Table").innerHTML;
+		document.getElementById("total_Table").innerHTML = total_Table + '<tr><td>&nbsp;</td>&nbsp;<td></td><td class="preUni"><b>Transporte: </b></td><td class="preTotal"><b>' +totalTransporte+ '</b></td></tr>' + '<tr><td>&nbsp;</td>&nbsp;<td></td><td class="preUni"><b>IVA ('+(IVA*100)+'%): </b></td><td class="preTotal"><b>' +totalIVA+ '</b></td></tr>' + '<tr><td>&nbsp;</td>&nbsp;<td></td><td class="preUni"><b>Total: </b></td><td class="preTotal" id="totalAPagar"><b>' +totalAPagar+ ' €</b></td></tr>';
 	}	
 	////////
 	/////////
@@ -181,11 +181,12 @@ window.onload = function (){
 	///////////
 	///////////
 	////////////
-	/////////////function pideDatos(elEvento) {
-		document.getElementById("divDatos").className = "divsSi";
-/**/	document.getElementById("divTotal").className = "divsNo";
-/**/	document.getElementById("divPago").className = "divsNo";		
-		document.getElementById("botonPago").disabled = false;
+	/////////////
+	function pideDatos(elEvento) {
+		document.getElementById("div_Data").className = "divsSi";
+/**/	document.getElementById("calculate_Total").className = "calculate_Pay";
+/**/	document.getElementById("div_button_Pay").className = "calculate_Pay";		
+		document.getElementById("button_Pay").disabled = false;
 	}	
 
 	
@@ -194,13 +195,13 @@ window.onload = function (){
 //FUNCION DE VALIDACION DE DATOS PERSONALES:
 	function validaDatosPersonales(elEvento) {
 
-		var todoBien = true;
+		var flag = true;
 	
 	
 		 //Nombre:
 			var vNombre = document.getElementById("nombre").value;
 			if( vNombre == null || vNombre.length == 0 || /^\s+$/.test(vNombre) || !isNaN(vNombre)) {
-				todoBien=false;
+				flag=false;
 				document.getElementById("nombre").className = "textMal";
 			}
 			else{
@@ -208,26 +209,22 @@ window.onload = function (){
 			}	
 	
 	
-		//DNI:	
-			var vDNI = document.getElementById("dni").value;
-			var letras = ['T', 'R', 'W', 'A', 'G', 'M', 'Y', 'F', 'P', 'D', 'X', 'B', 'N',
-			'J', 'Z', 'S', 'Q', 'V', 'H', 'L', 'C', 'K', 'E'];
-			
-			if( (/^\d{8}[A-Z]$/.test(vDNI)) ) {
-				todoBien=false;
-				document.getElementById("dni").className = "textMal";
+		//TIPO DE DOCUMENTO	
+		
+			var document_type = document.getElementById("document_Type").selectedIndex;
+			if( document_type == null || document_type == 0 ) {
+				flag=false;
+				document.getElementById("document_Type").className = "textMal";
 			}
 			else{
-				document.getElementById("dni").className = "textBien";
+				document.getElementById("document_Type").className = "textBien";
 			}
-			
-			
 	
 	
 		//Fecha de nacimiento DIA:
 			var vFechaNacimientoDia = document.getElementById("fechaNacimientoDia").selectedIndex;
 			if( vFechaNacimientoDia == null || vFechaNacimientoDia == 0 ) {
-				todoBien=false;
+				flag=false;
 				document.getElementById("fechaNacimientoDia").className = "textMal";
 			}
 			else{
@@ -236,7 +233,7 @@ window.onload = function (){
 		//Fecha de nacimiento MES:
 			var vFechaNacimientoMes = document.getElementById("fechaNacimientoMes").selectedIndex;
 			if( vFechaNacimientoMes == null || vFechaNacimientoMes == 0 ) {
-				todoBien=false;
+				flag=false;
 				document.getElementById("fechaNacimientoMes").className = "textMal";
 			}
 			else{
@@ -245,7 +242,7 @@ window.onload = function (){
 		//Fecha de nacimiento AÑO:
 			var vFechaNacimientoAnio = document.getElementById("fechaNacimientoAnio").selectedIndex;
 			if( vFechaNacimientoAnio == null || vFechaNacimientoAnio == 0 ) {
-				todoBien=false;
+				flag=false;
 				document.getElementById("fechaNacimientoAnio").className = "textMal";
 			}
 			else{
@@ -256,7 +253,7 @@ window.onload = function (){
 		//Telefono:
 			var vMovil = document.getElementById("movil").value;
 			if( !(/^\d{9}$/.test(vMovil))  ) {
-				todoBien=false;
+				flag=false;
 				document.getElementById("movil").className = "textMal";
 			}
 			else{
@@ -270,7 +267,7 @@ window.onload = function (){
 
 			//email 1
 			if( !(/^\w+([-.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/.test(vEmail1)) ) {
-				todoBien=false;
+				flag=false;
 				document.getElementById("email1").className = "textMal";
 			}
 			else{
@@ -279,7 +276,7 @@ window.onload = function (){
 			
 			//email 2
 			if( !(/^\w+([-.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/.test(vEmail2)) ) {
-				todoBien=false;
+				flag=false;
 				document.getElementById("email2").className = "textMal";
 			}
 			else{
@@ -288,73 +285,18 @@ window.onload = function (){
 
 			//Comparacion email 1 y 2
 			if (vEmail1 != vEmail2){
-				todoBien=false;
+				flag=false;
 				document.getElementById("email2").className = "textMal";
 			}
-
-			
-		 //Nombre Via:
-			var vViaNombre = document.getElementById("viaNombre").value;
-			if( vViaNombre == null || vViaNombre.length == 0 || /^\s+$/.test(vViaNombre) || !isNaN(vViaNombre)) {
-				todoBien=false;
-				document.getElementById("viaNombre").className = "textMal";
-			}
-			else{
-				document.getElementById("viaNombre").className = "textBien";
-			}				
-
-			
-		//Via Numero:	
-			var vViaNumero = document.getElementById("viaNumero").value;
-			if( vViaNumero=="" || isNaN(vViaNumero) ) {
-				todoBien=false;
-				document.getElementById("viaNumero").className = "textMal";
-			}	
-			else{
-				document.getElementById("viaNumero").className = "textBien";
-			}	
-
-			
-		 //Localidad:
-			var vLocalidad = document.getElementById("localidad").value;
-			if( vLocalidad == null || vLocalidad.length == 0 || /^\s+$/.test(vLocalidad) || !isNaN(vLocalidad)) {
-				todoBien=false;
-				document.getElementById("localidad").className = "textMal";
-			}
-			else{
-				document.getElementById("localidad").className = "textBien";
-			}					
-
-			
-		//Codigo Postal:	
-			var vCodigoPostal = document.getElementById("codigoPostal").value;
-			if( vCodigoPostal.length!=5 || vCodigoPostal=="" || isNaN(vCodigoPostal) ) {
-				todoBien=false;
-				document.getElementById("codigoPostal").className = "textMal";
-			}	
-			else{
-				document.getElementById("codigoPostal").className = "textBien";
-			}	
-	
-	
-		//Provincia:
-			var vProvincia = document.getElementById("provincia").selectedIndex;
-			if( vProvincia == null || vProvincia == 0 ) {
-				todoBien=false;
-				document.getElementById("provincia").className = "textMal";
-			}
-			else{
-				document.getElementById("provincia").className = "textBien";
-			}	
-	
-	
-		//Si no ha habido ni un solo error, se ejecuta la siguiente funcion que se encarga de mostrar el formulario de los datos personales:
-		if (todoBien){
+		if (flag){
 			pideDatosPago();
 		}
 		else{
-			document.getElementById("botonConfirmar").disabled = true;
+			document.getElementById("button_Confirm").disabled = true;
 		}
+			
+		 //Nombre Via:
+			
 	}
 
 	
@@ -362,10 +304,10 @@ window.onload = function (){
 	
 //FUNCION DE VALIDAR DATOS y PEDIR DATOS PAGO
 	function pideDatosPago(elEvento) {
-/**/	document.getElementById("divTotal").className = "divsNo";
-/**/	document.getElementById("divDatos").className = "divsNo";
-		document.getElementById("divPago").className = "divsSi";
-		document.getElementById("botonConfirmar").disabled = false;
+/**/	document.getElementById("calculate_Total").className = "calculate_Pay";
+/**/	document.getElementById("div_Data").className = "calculate_Pay";
+		document.getElementById("div_button_Pay").className = "divsSi";
+		document.getElementById("button_Confirm").disabled = false;
 	}
 	
 	
@@ -374,12 +316,12 @@ window.onload = function (){
 //FUNCION DE VALIDACION DE DATOS PAGO:
 	function validaDatosPago(elEvento) {
 
-		var todoBien = true;
+		var flag = true;
 		
 		//Titular de la cuenta:
 		var vTitular = document.getElementById("titular").value;
 		if( vTitular == null || vTitular.length == 0 || /^\s+$/.test(vTitular) || !isNaN(vTitular)) {
-			todoBien=false;
+			flag=false;
 			document.getElementById("titular").className = "textMal";
 		}
 		else{
@@ -397,7 +339,7 @@ window.onload = function (){
 			}
 		}
 		if(!seleccionado) {
-			todoBien=false;
+			flag=false;
 			document.getElementById("alertTipoDeTarjeta").className = "alertTipoDeTarjeta";
 		}
 		else{
@@ -408,7 +350,7 @@ window.onload = function (){
 		//Numero de tarjeta:	
 		var vNumeroTarjeta = document.getElementById("numeroTarjeta").value;
 		if( vNumeroTarjeta.length!=16 || vNumeroTarjeta=="" || isNaN(vNumeroTarjeta) ) {
-			todoBien=false;
+			flag=false;
 			document.getElementById("numeroTarjeta").className = "textMal";
 		}	
 		else{
@@ -419,7 +361,7 @@ window.onload = function (){
 		//CVC de la tarjeta:	
 		var vCvcTarjeta = document.getElementById("cvcTarjeta").value;
 		if( vCvcTarjeta.length!=3 || vCvcTarjeta=="" || isNaN(vCvcTarjeta) ) {
-			todoBien=false;
+			flag=false;
 			document.getElementById("cvcTarjeta").className = "textMal";
 		}	
 		else{
@@ -430,7 +372,7 @@ window.onload = function (){
 		//Fecha de tarjeta MES:
 		var vMesTarjeta = document.getElementById("mesTarjeta").selectedIndex;
 		if( vMesTarjeta == null || vMesTarjeta == 0 ) {
-			todoBien=false;
+			flag=false;
 			document.getElementById("mesTarjeta").className = "textMal";
 		}
 		else{
@@ -439,7 +381,7 @@ window.onload = function (){
 		//Fecha de tarjeta AÑO:
 		var vAnioTarjeta = document.getElementById("anioTarjeta").selectedIndex;
 		if( vAnioTarjeta == null || vAnioTarjeta == 0 ) {
-			todoBien=false;
+			flag=false;
 			document.getElementById("anioTarjeta").className = "textMal";
 		}
 		else{
@@ -448,7 +390,7 @@ window.onload = function (){
 
 
 		//Si no ha habido ni un solo error, se ejecuta la siguiente funcion que se encarga de enviar los datos:
-		if (todoBien){
+		if (flag){
 			validaDatosPagoYEnviaCarro();
 		}
 	}
